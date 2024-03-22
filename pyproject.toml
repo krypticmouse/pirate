@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pirate"
+version = "0.1.0"
+description = ""
+authors = ["Herumb Shandilya <herumbshandilya123@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+polars = "^0.20.16"
+mkdocs-material = {extras = ["imaging"], version = "^9.5.14"}
+mkdocstrings = {extras = ["crystal", "python"], version = "^0.24.1"}
+pytest = "^8.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

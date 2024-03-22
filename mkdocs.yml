@@ -1,0 +1,78 @@
+site_name: Pirate
+
+repo_url: https://github.com/krypticmouse/pirate
+repo_name: krypticmouse/pirate
+nav:
+  - Home: index.md
+  - API Reference: 
+    - Getting Started: API References/index.md
+    - Data:
+      - BaseData: API References/Data/base.md
+      - Queries: API References/Data/queries.md
+      - Passages: API References/Data/passages.md
+    - Miners: API References/miners.md
+  - Creator Portfolio: https://www.herumbshandilya.com/
+docs_dir: 'docs/docs'
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+      primary: black
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode    
+      primary: black
+      accent: lime
+  icon:
+    repo: fontawesome/brands/git-alt
+
+plugins:
+  - social
+  - search
+  - mkdocstrings
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/krypticmouse
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/krypticmouse
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/herumb-shandilya/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+copyright: |
+  &copy; 2024 <a href="https://github.com/krypticmouse"  target="_blank" rel="noopener">Herumb Shandilya</a>
