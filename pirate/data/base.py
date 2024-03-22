@@ -1,4 +1,5 @@
 import json
+import textwrap
 
 from abc import ABC
 from typing import (
@@ -31,7 +32,7 @@ class BaseData(ABC):
         self.content_key = content_key or 'content'
 
         self.load(data)
-    
+
     def save(self, path: str):
         """
         Save the data to a file.
@@ -50,7 +51,7 @@ class BaseData(ABC):
             self.to_csv(path)
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
-    
+
     def load(self, data: Union[str, List, Mapping]):
         """
         Load data from a file, list, or dictionary.
@@ -143,7 +144,7 @@ class BaseData(ABC):
                 mapped_data[record[self.id_key]] = record[self.content_key]
 
         return mapped_data
-    
+
     def from_csv(self, data: str):
         """
         Load data from a CSV file.
@@ -159,3 +160,16 @@ class BaseData(ABC):
                 mapped_data[k] = v.strip()
             
         return mapped_data
+
+    def __getitem__(self, key):
+        """ Get the value of a key. """
+        return self.data[key]
+
+    def __len__(self):
+        """ Get the length of the data. """
+        return len(self.data)
+
+    def __iter__(self):
+        """ Return an iterator over the ranking. """
+        return iter(self.data)
+    

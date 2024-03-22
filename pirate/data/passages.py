@@ -1,3 +1,4 @@
+import textwrap
 from typing import List, Mapping, Union, Optional
 
 from .base import BaseData
@@ -24,3 +25,13 @@ class Passages(BaseData):
         content_key = content_key or 'passage'
         
         super().__init__(data, id_key, content_key)
+    
+    def __repr__(self):
+        """ Return the string representation of the BaseData object. """
+        string = textwrap.dedent(f"""Passages(
+            data: {len(self.data)} entries
+            id_key: {self.id_key}
+            content_key: {self.content_key}
+        )""", prefix='\t')
+        
+        return string

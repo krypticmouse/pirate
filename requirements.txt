@@ -1,6 +1,5 @@
-polars==0.20.16
-mkdocs-material==9.5.14
-mkdocstrings[crystal,python]==0.24.1
 pytest==8.1.1
 urllib3==1.26.7
+polars==0.20.16
 mkdocs-material[imaging]==9.5.14
+mkdocstrings[crystal,python]==0.24.1

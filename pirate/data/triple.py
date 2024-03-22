@@ -107,3 +107,19 @@ class Triples:
         with open(path, 'w') as f:
             for qid, ppid, npid in self.triples:
                 f.write(f"{qid},{ppid},{npid}\n")
+
+    def __getitem__(self, index: int) -> List[str]:
+        """ Return the triple at the given index. """
+        return self.triples[index]
+    
+    def __repr__(self):
+        """ Return the string representation of the Triples object. """
+        return f"Triples({len(self.triples)} triples)"
+    
+    def __len__(self):
+        """ Return the number of triples. """
+        return len(self.triples)
+    
+    def __iter__(self):
+        """ Return an iterator over the triples. """
+        return iter(self.triples)
