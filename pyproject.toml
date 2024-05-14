@@ -11,6 +11,10 @@ polars = "^0.20.16"
 mkdocs-material = {extras = ["imaging"], version = "^9.5.14"}
 mkdocstrings = {extras = ["crystal", "python"], version = "^0.24.1"}
 pytest = "^8.1.1"
+rank-bm25 = "^0.2.2"
+sentence-transformers = "^2.6.1"
+pydantic = "^2.7.1"
+loguru = "^0.7.2"
 
 
 [build-system]

@@ -12,7 +12,7 @@ nav:
       - Passages: API References/Data/passages.md
     - Miners: API References/miners.md
   - Creator Portfolio: https://www.herumbshandilya.com/
-docs_dir: 'docs/docs'
+docs_dir: 'docs/'
 
 theme:
   name: material

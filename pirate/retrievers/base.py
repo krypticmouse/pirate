@@ -1,0 +1,2 @@
+class BaseRetriever:
+    pass

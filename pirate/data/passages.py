@@ -21,8 +21,8 @@ class Passages(BaseData):
             id_key: The key used for the id in the data. Defaults to 'pid'.
             content_key: The key used for the content in the data. Defaults to 'passage'.
         """
-        id_key = id_key or 'pid'
-        content_key = content_key or 'passage'
+        id_key = id_key or "pid"
+        content_key = content_key or "passage"
         
         super().__init__(data, id_key, content_key)
     
@@ -32,6 +32,6 @@ class Passages(BaseData):
             data: {len(self.data)} entries
             id_key: {self.id_key}
             content_key: {self.content_key}
-        )""", prefix='\t')
+        )""", prefix="\t")
         
         return string

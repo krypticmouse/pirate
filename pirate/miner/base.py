@@ -1,14 +1,19 @@
 from typing import List
 from abc import ABC, abstractmethod
 
-from ..data import Triples
+from pirate.data import Triples
 
 class BaseMiner(ABC):
     """
     BaseMiner is an abstract base class that provides methods for mining data.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(
+        self,
+        triples: Triples,
+        *args,
+        **kwargs
+    ):
         """
         Initialize the BaseMiner object.
 
@@ -20,7 +25,6 @@ class BaseMiner(ABC):
     @abstractmethod
     def mine(
         self, 
-        triples: Triples,
         num_negs_per_pair: int = 1,
         exclude_pairs: List[List[str]] = []
     ):

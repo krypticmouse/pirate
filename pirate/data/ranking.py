@@ -27,11 +27,11 @@ class Ranking:
 			NotImplementedError: If the file extension or data type is not supported.
 		"""
 		if isinstance(ranking, str):
-			ext = ranking.split('.')[-1]
+			ext = ranking.split(".")[-1]
 
-			if ext == 'json' or ext == 'jsonl':
+			if ext == "json" or ext == "jsonl":
 				self.ranking = self.from_json(ranking)
-			elif ext == 'csv':
+			elif ext == "csv":
 				self.ranking = self.from_csv(ranking)
 			else:
 				raise NotImplementedError(f"Extension {ext} not supported")
@@ -51,11 +51,11 @@ class Ranking:
 		Raises:
 			NotImplementedError: If the file extension is not supported.
 		"""
-		ext = path.split('.')[-1]
+		ext = path.split(".")[-1]
 
-		if ext == 'json' or ext == 'jsonl':
+		if ext == "json" or ext == "jsonl":
 			self.to_json(path)
-		elif ext == 'csv':
+		elif ext == "csv":
 			self.to_csv(path)
 		else:
 			raise NotImplementedError(f"Extension {ext} not supported")
@@ -67,7 +67,7 @@ class Ranking:
 		Args:
 			path: The path to the JSON file from which the ranking will be loaded.
 		"""
-		self.data = pl.read_json(path, columns=['qid', 'pid', 'rank', 'score'])
+		self.data = pl.read_json(path, columns=["qid", "pid", "rank", "score"])
 
 	def from_csv(self, path: str):
 		"""
@@ -76,7 +76,7 @@ class Ranking:
 		Args:
 			path: The path to the CSV file from which the ranking will be loaded.
 		"""
-		self.data = pl.read_csv(path, columns=['qid', 'pid', 'rank', 'score'])
+		self.data = pl.read_csv(path, columns=["qid", "pid", "rank", "score"])
 
 	def from_list(self, ranking: List):
 		"""
@@ -85,7 +85,7 @@ class Ranking:
 		Args:
 			ranking: The list from which the ranking will be loaded.
 		"""
-		self.data = pl.DataFrame(ranking, schema=['qid', 'pid', 'rank', 'score'])
+		self.data = pl.DataFrame(ranking, schema=["qid", "pid", "rank", "score"])
 
 	def to_json(self, path: str):
 		"""
@@ -103,7 +103,7 @@ class Ranking:
 		Args:
 			path: The path to the file where the ranking will be saved.
 		"""
-		self.data.write_ndjson(path, include_header=False, seperator=',')
+		self.data.write_ndjson(path, include_header=False, seperator=",")
 
 	def __getitem__(self, key):
 		""" Return the value of the key. """
@@ -117,7 +117,7 @@ class Ranking:
 			num_queries: {self.data['qid'].n_unique()}
 			max_score: {self.data['score'].max()}
 			min_score: {self.data['score'].min()}
-		)""", prefix='	')
+		)""", prefix="	")
 		
 		return string
 	

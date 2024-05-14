@@ -1,5 +1,4 @@
 import json
-import textwrap
 
 from abc import ABC
 from typing import (
@@ -28,8 +27,8 @@ class BaseData(ABC):
             id_key: The key used for the id in the data. Defaults to 'id'.
             content_key: The key used for the content in the data. Defaults to 'content'.
         """
-        self.id_key = id_key or 'id'
-        self.content_key = content_key or 'content'
+        self.id_key = id_key or "id"
+        self.content_key = content_key or "content"
 
         self.load(data)
 
@@ -43,11 +42,11 @@ class BaseData(ABC):
         Raises:
             NotImplementedError: If the file extension is not supported.
         """
-        ext = path.split('.')[-1]
+        ext = path.split(".")[-1]
 
-        if ext == 'json' or ext == 'jsonl':
+        if ext == "json" or ext == "jsonl":
             self.to_json(path)
-        elif ext == 'csv':
+        elif ext == "csv":
             self.to_csv(path)
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
@@ -63,11 +62,11 @@ class BaseData(ABC):
             NotImplementedError: If the data type or file extension is not supported.
         """
         if isinstance(data, str):
-            ext = data.split('.')[-1]
+            ext = data.split(".")[-1]
 
-            if ext == 'json' or ext == 'jsonl':
+            if ext == "json" or ext == "jsonl":
                 self.data = self.from_json(data)
-            elif ext == 'csv':
+            elif ext == "csv":
                 self.data = self.from_csv(data)
             else:
                 raise NotImplementedError(f"Extension {ext} not supported")
@@ -88,9 +87,9 @@ class BaseData(ABC):
         Args:
             path: The path to the file where the data will be saved.
         """
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             for k, v in self.data.items():
-                f.write(json.dumps({self.id_key: k, self.content_key: v}) + '\n')
+                f.write(json.dumps({self.id_key: k, self.content_key: v}) + "\n")
 
     def to_csv(self, path: str):
         """
@@ -99,7 +98,7 @@ class BaseData(ABC):
         Args:
             path: The path to the file where the data will be saved.
         """
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             for k, v in self.data.items():
                 f.write(f"{k},{v}\n")
 
@@ -138,7 +137,7 @@ class BaseData(ABC):
 
         mapped_data = {}
 
-        with open(data, 'r') as f:
+        with open(data, "r") as f:
             for line in f:
                 record = json.loads(line)
                 mapped_data[record[self.id_key]] = record[self.content_key]
@@ -154,9 +153,9 @@ class BaseData(ABC):
         """
         mapped_data = {}
 
-        with open(data, 'r') as f:
+        with open(data, "r") as f:
             for line in f:
-                k, v = line.split(',')
+                k, v = line.split(",")
                 mapped_data[k] = v.strip()
             
         return mapped_data
@@ -172,4 +171,3 @@ class BaseData(ABC):
     def __iter__(self):
         """ Return an iterator over the ranking. """
         return iter(self.data)
-    

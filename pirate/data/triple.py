@@ -14,9 +14,9 @@ class Triples:
         Args:
             triples: The triples to be loaded. It can be a string (path to a file) or a list of triples.
         """
-        self.load(triples)
+        self.triples = self.load(triples)
 
-    def load(self, triples: Union[str, List[List[str]]]):
+    def load(self, triples: Union[str, List[List[str]]]) -> List[List[str]]:
         """
         Load triples from a file or a list.
 
@@ -27,17 +27,17 @@ class Triples:
             NotImplementedError: If the file extension or data type is not supported.
         """
         if isinstance(triples, str):
-            ext = triples.split('.')[-1]
+            ext = triples.split(".")[-1]
 
-            if ext == 'json' or ext == 'jsonl':
-                self.triples = self.from_json(triples)
-            elif ext == 'csv':
-                self.triples = self.from_csv(triples)
+            if ext == "json" or ext == "jsonl":
+                return self.from_json(triples)
+            elif ext == "csv":
+                return self.from_csv(triples)
             else:
                 raise NotImplementedError(f"Extension {ext} not supported")
 
         elif isinstance(triples, list):
-            self.triples = triples
+            return triples
         else:
             raise NotImplementedError(f"Type {type(triples)} not supported")
     
@@ -51,11 +51,11 @@ class Triples:
         Raises:
             NotImplementedError: If the file extension is not supported.
         """
-        ext = path.split('.')[-1]
+        ext = path.split(".")[-1]
 
-        if ext == 'json' or ext == 'jsonl':
+        if ext == "json" or ext == "jsonl":
             self.to_json(path)
-        elif ext == 'csv':
+        elif ext == "csv":
             self.to_csv(path)
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
@@ -70,7 +70,7 @@ class Triples:
         Returns:
             A list of triples.
         """
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             return [json.loads(line) for line in f]
     
     def from_csv(self, path: str) -> List[List[str]]:
@@ -83,8 +83,8 @@ class Triples:
         Returns:
             A list of triples.
         """
-        with open(path, 'r') as f:
-            return [[item.strip() for item in line.split(',')] for line in f]
+        with open(path, "r") as f:
+            return [[item.strip() for item in line.split(",")] for line in f]
     
     def to_json(self, path: str):
         """
@@ -93,9 +93,9 @@ class Triples:
         Args:
             path: The path to the file where the triples will be saved.
         """
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             for qid, ppid, npid in self.triples:
-                f.write(json.dumps([qid, ppid, npid]) + '\n')
+                f.write(json.dumps([qid, ppid, npid]) + "\n")
 
     def to_csv(self, path: str):
         """
@@ -104,7 +104,7 @@ class Triples:
         Args:
             path: The path to the file where the triples will be saved.
         """
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             for qid, ppid, npid in self.triples:
                 f.write(f"{qid},{ppid},{npid}\n")
 

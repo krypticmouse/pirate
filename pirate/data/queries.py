@@ -21,8 +21,8 @@ class Queries(BaseData):
             id_key: The key used for the id in the data. Defaults to 'qid'.
             content_key: The key used for the content in the data. Defaults to 'query'.
         """
-        id_key = id_key or 'qid'
-        content_key = content_key or 'query'
+        id_key = id_key or "qid"
+        content_key = content_key or "query"
         
         super().__init__(data, id_key, content_key)
 
@@ -32,6 +32,6 @@ class Queries(BaseData):
             data: {len(self.data)} entries
             id_key: {self.id_key}
             content_key: {self.content_key}
-        )""", prefix='\t')
+        )""", prefix="\t")
         
         return string
