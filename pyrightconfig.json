@@ -34,5 +34,6 @@
     "typeCheckDiagnostics": {
       "reportMissingImport": true,
       "reportMissingTypeStubs": true
-    }
-  }
+    },
+    "verboseOutput": true,
+}
