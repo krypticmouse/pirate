@@ -28,10 +28,12 @@ class Passages(BaseData):
     
     def __repr__(self):
         """ Return the string representation of the BaseData object. """
-        string = textwrap.dedent(f"""Passages(
-            data: {len(self.data)} entries
-            id_key: {self.id_key}
-            content_key: {self.content_key}
-        )""", prefix="\t")
+        string = textwrap.dedent(
+            f"""Passages(
+                data: {len(self.data)} entries
+                id_key: {self.id_key}
+                content_key: {self.content_key}
+            )"""
+        )
         
         return string

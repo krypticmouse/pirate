@@ -111,13 +111,15 @@ class Ranking:
 
 	def __repr__(self):
 		""" Return the string representation of the Ranking object. """
-		string = textwrap.dedent(f"""Ranking(
-			data: {len(self.data)} rows
-			k: {self.data['rank'].max()}
-			num_queries: {self.data['qid'].n_unique()}
-			max_score: {self.data['score'].max()}
-			min_score: {self.data['score'].min()}
-		)""", prefix="	")
+		string = textwrap.dedent(
+			f"""Ranking(
+				data: {len(self.data)} rows
+				k: {self.data['rank'].max()}
+				num_queries: {self.data['qid'].n_unique()}
+				max_score: {self.data['score'].max()}
+				min_score: {self.data['score'].min()}
+			)"""
+		)
 		
 		return string
 	

@@ -119,9 +119,10 @@ class BaseData(ABC):
             data: The list from which the data will be loaded.
         """
 
+        mapped_data = {}
+
         if isinstance(data[0], str):
             mapped_data = {i: v for i, v in enumerate(data)}
-        
         elif isinstance(data[0], list):
             mapped_data = {i: v for i, v in data}
         
