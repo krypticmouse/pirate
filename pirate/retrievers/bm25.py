@@ -52,7 +52,7 @@ class BM25Retriever(BaseRetriever):
         logger.info("Finished indexing corpus.")
 
     def rank(self, queries: Queries, top_k: Optional[int] = None) -> Ranking:
-        if self.indexed_corpus is None:
+        if self.indexed_corpus is None or self.corpus is None:
             raise ValueError("Index not built. Please call the index method first.")
 
         tokenized_queries = [self.tokenizer(queries[query_id]) for query_id in queries]
@@ -74,7 +74,7 @@ class BM25Retriever(BaseRetriever):
                 sorted_indices = score_array.argsort()[::-1]
 
                 for j, doc_id in enumerate(sorted_indices):
-                    ranking_list.append([query_id, self.corpus[doc_id], score_array[doc_id], j])
+                    ranking_list.append([query_id, self.index_id_lookup[doc_id], score_array[doc_id], j])
         
         ranking = Ranking(ranking_list)
 

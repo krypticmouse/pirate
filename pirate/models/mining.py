@@ -1,5 +1,5 @@
-from pydantic import BaseModel
 from typing import Optional, Union
+from pydantic import BaseModel, ConfigDict
 
 from pirate.models import Encoder
 from pirate.models.types import Sampling
@@ -11,6 +11,8 @@ from pirate.data import (
 )
 
 class MiningParams(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
     passages: Passages
     queries: Queries
     triples: Triples

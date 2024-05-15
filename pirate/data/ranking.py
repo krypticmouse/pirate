@@ -67,7 +67,7 @@ class Ranking:
 		Args:
 			path: The path to the JSON file from which the ranking will be loaded.
 		"""
-		self.data = pl.read_json(path, columns=["qid", "pid", "rank", "score"])
+		self.data = pl.read_json(path, schema={"qid": pl.String, "pid": pl.String, "rank": pl.Int32, "score": pl.Float64})
 
 	def from_csv(self, path: str):
 		"""

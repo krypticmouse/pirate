@@ -86,7 +86,7 @@ class Triples:
         with open(path, "r") as f:
             return [[item.strip() for item in line.split(",")] for line in f]
     
-    def to_json(self, path: str):
+    def to_json(self, path: str) -> None:
         """
         Save the triples to a JSON file.
 
@@ -94,10 +94,10 @@ class Triples:
             path: The path to the file where the triples will be saved.
         """
         with open(path, "w") as f:
-            for qid, ppid, npid in self.triples:
-                f.write(json.dumps([qid, ppid, npid]) + "\n")
+            for triple in self.triples:
+                f.write(json.dumps(list(triple)) + "\n")
 
-    def to_csv(self, path: str):
+    def to_csv(self, path: str) -> None:
         """
         Save the triples to a CSV file.
 
@@ -105,8 +105,8 @@ class Triples:
             path: The path to the file where the triples will be saved.
         """
         with open(path, "w") as f:
-            for qid, ppid, npid in self.triples:
-                f.write(f"{qid},{ppid},{npid}\n")
+            for triple in self.triples:
+                f.write(f"{','.join(triple)}\n")
 
     def __getitem__(self, index: int) -> List[str]:
         """ Return the triple at the given index. """
