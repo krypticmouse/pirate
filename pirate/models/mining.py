@@ -17,7 +17,7 @@ class MiningParams(BaseModel):
     queries: Queries
     triples: Triples
 
-class HardNegativesMiner(MiningParams):
+class HardNegativesMinerParams(MiningParams):
     passage_threshold: float
     top_k: Optional[int] = None
 
