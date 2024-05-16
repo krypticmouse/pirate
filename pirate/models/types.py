@@ -10,5 +10,3 @@ class Encoder(Enum):
 class Sampling(Enum):
     RANDOM = "random"
     RTOP_K = "rtop-k"
-    SEMI_HARD = "semi-hard"
-    DECAY_HARD = "decay-hard"

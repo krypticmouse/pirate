@@ -13,13 +13,20 @@ from pirate.data import (
 class MiningParams(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     
-    passages: Passages
-    queries: Queries
     triples: Triples
+    verbose: Optional[bool] = False
 
 class HardNegativesMinerParams(MiningParams):
-    passage_threshold: float
-    top_k: Optional[int] = None
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
+    passages: Passages
+    queries: Queries
+
+    top_k: Optional[int] = None
     model: Union[BaseRetriever, Encoder]
     sampling: Sampling = Sampling.RANDOM
+
+    seed: Optional[int] = None
+
+class InBatchNegativesMinerParams(MiningParams):
+    seed: Optional[int] = None

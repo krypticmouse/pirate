@@ -78,6 +78,18 @@ class Ranking:
 		"""
 		self.data = pl.read_csv(path, columns=["qid", "pid", "rank", "score"])
 
+	def get_passage_groups(self, qid: str) -> pl.DataFrame:
+		"""
+		Get the passage groups for a given query ID.
+
+		Args:
+			qid: The query ID for which the passage groups will be retrieved.
+
+		Returns:
+			A DataFrame with the passage groups for the given query ID.
+		"""
+		return self.data.filter(pl.col("qid") == qid).sort("rank")
+
 	def from_list(self, ranking: List):
 		"""
 		Load ranking from a list.

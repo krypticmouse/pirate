@@ -1,8 +1,16 @@
+import random
 from typing import List
 
-from pirate.data.triples import Triples
+from tqdm import tqdm
+
+from pirate.data import (
+    Passages,
+    Queries,
+    Triples
+)
 from pirate.models import (
     Encoder, 
+    Sampling,
     HardNegativesMinerParams
 )
 from pirate.retrievers import (
@@ -16,11 +24,30 @@ class HardNegativesMiner:
     def __init__(self, sampling_params: HardNegativesMinerParams):
         self.sampling_params = sampling_params
 
-        self.passages = self.sampling_params.passages
-        self.queries = self.sampling_params.queries
         self.triples = self.sampling_params.triples
 
+        assert self.triples is not None, "Triples must be provided."
+        assert max([len(i) for i in self.triples]) == 2, "Triples must be in the pair format [qid, pid]."
+
+        passage_dict = {}
+        query_dict = {}
+        for qid, pid in self.triples:
+            assert qid in self.sampling_params.queries, f"Query {qid} not found."
+            assert pid in self.sampling_params.passages, f"Passage {pid} not found."
+
+            passage_dict[pid] = self.sampling_params.passages[pid]
+            query_dict[qid] = self.sampling_params.queries[qid]
+            
+        self.passages = Passages(passage_dict)
+        self.queries = Queries(query_dict)
+
         self.encoder = self._get_model()
+
+        self._seed()
+
+    def _seed(self):
+        if self.sampling_params.seed is not None:
+            random.seed(self.sampling_params.seed)
         
     def _get_model(self) -> BaseRetriever:
         model = self.sampling_params.model
@@ -47,11 +74,26 @@ class HardNegativesMiner:
         exclude_pairs: List[List[str]] = []
     ) -> Triples:
         rankings = self.encoder.rank(self.passages, self.queries, self.sampling_params.top_k)
+        exclude_pairs = exclude_pairs or [[qid, pid] for qid, pid,_ in self.triples]
 
         triples_list = []
-        for query_id in self.queries:
-            for i, passage_id in enumerate(self.passages):
-                pass
+        for qid, pos_pid in tqdm(self.triples, desc="Mining hard negatives", total=len(self.triples), disable=self.sampling_params.verbose):
+            if [qid, pos_pid] in exclude_pairs:
+                continue
+
+            passage_groups = rankings.get_passage_groups(qid)["pid"].to_list()
+            
+            passage_sample_set = []
+            match self.sampling_params.sampling:
+                case Sampling.RANDOM:
+                    passage_sample_set = passage_groups
+                case Sampling.RTOP_K:
+                    passage_sample_set = passage_groups[:self.sampling_params.top_k] if self.sampling_params.top_k else passage_groups
+
+            random_negative_passages = random.sample(passage_sample_set, num_negs_per_pair)
+
+            for neg_pid in random_negative_passages:
+                triples_list.append([qid, pos_pid, neg_pid])
 
         triples = Triples(triples_list)
         return triples
