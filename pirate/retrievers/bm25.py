@@ -1,13 +1,12 @@
 import numpy as np
 
 from rank_bm25 import (
-    BM25,
     BM25Okapi,
     BM25L,
     BM25Plus
 )
 from loguru import logger
-from typing import Optional, Callable
+from typing import Any, Optional, Callable
 
 from pirate.data.ranking import Ranking
 
@@ -27,7 +26,7 @@ class BM25Retriever(BaseRetriever):
         self.indexed_corpus = None
         self.corpus = None
 
-    def _get_model(self, model: Encoder) -> BM25:
+    def _get_model(self, model: Encoder) -> Any:
         match model:
             case Encoder.BM25:
                 return BM25Okapi

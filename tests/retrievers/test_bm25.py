@@ -45,7 +45,7 @@ def test_bm25_rank(sample_passages, sample_queries):
 def test_invalid_index_corpus():
     retriever = BM25Retriever(Encoder.BM25)
     with pytest.raises(ValueError):
-        retriever.index(["invalid", "corpus", "type"])
+        retriever.index(["invalid", "corpus", "type"])  # type: ignore
 
 def test_rank_before_index():
     retriever = BM25Retriever(Encoder.BM25)

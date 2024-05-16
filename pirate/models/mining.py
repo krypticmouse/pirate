@@ -17,8 +17,8 @@ class MiningParams(BaseModel):
     queries: Queries
     triples: Triples
 
-class ScoreThresholdMinerParams(MiningParams):
-    threshold: float = 0.8
+class HardNegativesMiner(MiningParams):
+    passage_threshold: float
     top_k: Optional[int] = None
 
     model: Union[BaseRetriever, Encoder]

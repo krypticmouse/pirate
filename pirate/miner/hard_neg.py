@@ -3,7 +3,7 @@ from typing import List
 from pirate.data.triples import Triples
 from pirate.models import (
     Encoder, 
-    ScoreThresholdMinerParams
+    HardNegativesMinerParams
 )
 from pirate.retrievers import (
     BaseRetriever,
@@ -12,9 +12,13 @@ from pirate.retrievers import (
     CrossEncoder
 )
 
-class ScoreThresholdMiner:
-    def __init__(self, sampling_params: ScoreThresholdMinerParams):
+class HardNegativesMiner:
+    def __init__(self, sampling_params: HardNegativesMinerParams):
         self.sampling_params = sampling_params
+
+        self.passages = self.sampling_params.passages
+        self.queries = self.sampling_params.queries
+        self.triples = self.sampling_params.triples
 
         self.encoder = self._get_model()
         
@@ -44,4 +48,10 @@ class ScoreThresholdMiner:
     ) -> Triples:
         rankings = self.encoder.rank(self.passages, self.queries, self.sampling_params.top_k)
 
-        triples = []
+        triples_list = []
+        for query_id in self.queries:
+            for i, passage_id in enumerate(self.passages):
+                pass
+
+        triples = Triples(triples_list)
+        return triples

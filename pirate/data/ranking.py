@@ -103,7 +103,7 @@ class Ranking:
 		Args:
 			path: The path to the file where the ranking will be saved.
 		"""
-		self.data.write_ndjson(path, include_header=False, seperator=",")
+		self.data.write_ndjson(path)
 
 	def __getitem__(self, key):
 		""" Return the value of the key. """
