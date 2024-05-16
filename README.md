@@ -46,4 +46,4 @@ While Pirate is currently focused on negative mining, the ultimate goal is to ma
 
 ## License
 
-Pirate is licensed under the Apache License 2.0. For more details, see the [LICENSE](./LICENSE) file. 
+Pirate is licensed under the Apache License 2.0. For more details, see the [LICENSE](./LICENSE) file.

@@ -10,19 +10,25 @@ MKDOCS = mkdocs
 # Define targets
 .PHONY: all lint type-check test docs clean
 
-all: lint type-check test docs
+all: lint fix type-check test
 
 lint:
 	$(RUFF) check .
 
+fix:
+	$(RUFF) --fix
+
 type-check:
-	$(PYRIGHT) .
+	poetry run $(PYRIGHT)
 
 test:
-	$(PYTEST) tests/
+	PYTHONPATH=$PYTHONPATH:. $(PYTEST) tests/
 
-docs:
+build-docs:
 	$(MKDOCS) build
+
+serve-docs:
+	$(MKDOCS) serve
 
 clean:
 	rm -rf __pycache__
