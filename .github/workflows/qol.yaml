@@ -25,4 +25,4 @@ jobs:
       - name: Test
         run: |
           pip install pytest
-          PYTHONPATH=$PYTHONPATH:. poetry run pytype
+          PYTHONPATH=$PYTHONPATH:. poetry run pytest
