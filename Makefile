@@ -1,4 +1,3 @@
-
 # Define variables
 PYTHON = python3
 PIP = pip3
@@ -8,7 +7,7 @@ PYTEST = pytest
 MKDOCS = mkdocs
 
 # Define targets
-.PHONY: all lint type-check test docs clean
+.PHONY: all lint type-check test build-docs serve-docs clean
 
 all: lint fix type-check test
 
