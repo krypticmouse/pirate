@@ -30,6 +30,7 @@
         "node_modules",
         "site-packages",
         "venv",
+        "tests/*"
     ],
     "typeCheckDiagnostics": {
       "reportMissingImport": true,

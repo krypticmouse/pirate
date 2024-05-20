@@ -1,7 +1,7 @@
 import random
 
 from tqdm import tqdm
-from typing import List
+from typing import List, Optional
 
 from pirate.data import Triples
 from pirate.models import (
@@ -14,6 +14,7 @@ class InBatchNegativesMiner:
         self.triples = self.sampling_params.triples
         
         assert self.triples is not None, "Triples must be provided."
+        assert len(self.triples) > 0, "Triples must not be empty."
         assert max([len(i) for i in self.triples]) == 2, "Triples must be in the pair format [qid, pid]."
 
         self._seed()
@@ -25,13 +26,11 @@ class InBatchNegativesMiner:
     def mine(
         self,
         num_negs_per_pair: int = 1,
-        exclude_pairs: List[List[str]] = []
+        exclude_pairs: Optional[List[List[str]]] = None
     ) -> Triples:
-        exclude_pairs = exclude_pairs or [[qid, pid] for qid, pid in self.triples]
-        
         triples_list = []
         for qid, pos_pid in tqdm(self.triples, desc="Mining in-batch negatives", total=len(self.triples), disable=self.sampling_params.verbose):
-            if [qid, pos_pid] in exclude_pairs:
+            if exclude_pairs and [qid, pos_pid] in exclude_pairs:
                 continue
             
             other_pos_pids = [pid for q, pid in self.triples if q != qid]

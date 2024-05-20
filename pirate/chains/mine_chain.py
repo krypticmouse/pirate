@@ -1,2 +1,5 @@
+from pirate.models.chains import MineChainConfig
+
 class MineChain:
-    pass
+    def __init__(self, config: MineChainConfig):
+        pass

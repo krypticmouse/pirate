@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import List, Optional
 
 from tqdm import tqdm
 
@@ -27,6 +27,7 @@ class HardNegativesMiner:
         self.triples = self.sampling_params.triples
 
         assert self.triples is not None, "Triples must be provided."
+        assert len(self.triples) > 0, "Triples must not be empty."
         assert max([len(i) for i in self.triples]) == 2, "Triples must be in the pair format [qid, pid]."
 
         passage_dict = {}
@@ -71,16 +72,16 @@ class HardNegativesMiner:
     def mine(
         self,
         num_negs_per_pair: int = 1,
-        exclude_pairs: List[List[str]] = []
+        exclude_pairs: Optional[List[List[str]]] = None
     ) -> Triples:
-        rankings = self.encoder.rank(self.passages, self.queries, self.sampling_params.top_k)
-        exclude_pairs = exclude_pairs or [[qid, pid] for qid, pid,_ in self.triples]
+        self.encoder.index(self.passages)
+        rankings = self.encoder.rank(self.queries, self.sampling_params.top_k)
 
         triples_list = []
         for qid, pos_pid in tqdm(self.triples, desc="Mining hard negatives", total=len(self.triples), disable=self.sampling_params.verbose):
-            if [qid, pos_pid] in exclude_pairs:
+            if exclude_pairs and [qid, pos_pid] in exclude_pairs:
                 continue
-
+            
             passage_groups = rankings.get_passage_groups(qid)["pid"].to_list()
             
             passage_sample_set = []

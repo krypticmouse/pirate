@@ -1,0 +1,4 @@
+{"qid": "q1", "pid": "p1", "rank": 1, "score": 0.9}
+{"qid": "q1", "pid": "p2", "rank": 2, "score": 0.8}
+{"qid": "q2", "pid": "p3", "rank": 1, "score": 0.7}
+{"qid": "q2", "pid": "p4", "rank": 2, "score": 0.6}

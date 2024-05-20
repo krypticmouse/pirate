@@ -15,7 +15,7 @@ lint:
 	$(RUFF) check .
 
 fix:
-	$(RUFF) --fix
+	$(RUFF) check . --fix
 
 type-check:
 	poetry run $(PYRIGHT)

@@ -67,7 +67,7 @@ class Ranking:
 		Args:
 			path: The path to the JSON file from which the ranking will be loaded.
 		"""
-		self.data = pl.read_json(path, schema={"qid": pl.String, "pid": pl.String, "rank": pl.Int32, "score": pl.Float64})
+		self.data = pl.read_ndjson(path, schema={"qid": pl.String, "pid": pl.String, "rank": pl.Int32, "score": pl.Float64})
 
 	def from_csv(self, path: str):
 		"""
@@ -106,7 +106,7 @@ class Ranking:
 		Args:
 			path: The path to the file where the ranking will be saved.
 		"""
-		self.data.write_json(path)
+		self.data.write_ndjson(path)
 
 	def to_csv(self, path: str):
 		"""
@@ -115,7 +115,7 @@ class Ranking:
 		Args:
 			path: The path to the file where the ranking will be saved.
 		"""
-		self.data.write_ndjson(path)
+		self.data.write_csv(path)
 
 	def __getitem__(self, key):
 		""" Return the value of the key. """

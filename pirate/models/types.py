@@ -10,3 +10,7 @@ class Encoder(Enum):
 class Sampling(Enum):
     RANDOM = "random"
     RTOP_K = "rtop-k"
+
+class Miners(Enum):
+    IN_BATCH_MINER = "in-batch"
+    HARD_MINER = "hard"
