@@ -21,7 +21,7 @@ type-check:
 	poetry run $(PYRIGHT)
 
 test:
-	PYTHONPATH=$PYTHONPATH:. $(PYTEST) tests/
+	PYTHONPATH=$PYTHONPATH:. poetry run $(PYTEST) tests/
 
 build-docs:
 	$(MKDOCS) build

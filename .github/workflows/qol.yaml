@@ -17,12 +17,12 @@ jobs:
       - name: Lint
         run: |
           pip install ruff
-          ruff check .
+          make lint
       - name: Type check
         run: |
           pip install pyright
-          poetry run pyright
+          make type-check
       - name: Test
         run: |
           pip install pytest
-          PYTHONPATH=$PYTHONPATH:. poetry run pytest
+          make test
