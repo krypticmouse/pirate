@@ -30,9 +30,9 @@ class Triples:
             ext = triples.split(".")[-1]
 
             if ext == "json" or ext == "jsonl":
-                return self.from_json(triples)
+                return self._from_json(triples)
             elif ext == "csv":
-                return self.from_csv(triples)
+                return self._from_csv(triples)
             else:
                 raise NotImplementedError(f"Extension {ext} not supported")
 
@@ -54,13 +54,13 @@ class Triples:
         ext = path.split(".")[-1]
 
         if ext == "json" or ext == "jsonl":
-            self.to_json(path)
+            self._to_json(path)
         elif ext == "csv":
-            self.to_csv(path)
+            self._to_csv(path)
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
         
-    def from_json(self, path: str) -> List[List[str]]:
+    def _from_json(self, path: str) -> List[List[str]]:
         """
         Load triples from a JSON file.
 
@@ -73,7 +73,7 @@ class Triples:
         with open(path, "r") as f:
             return [json.loads(line) for line in f]
     
-    def from_csv(self, path: str) -> List[List[str]]:
+    def _from_csv(self, path: str) -> List[List[str]]:
         """
         Load triples from a CSV file.
 
@@ -86,7 +86,7 @@ class Triples:
         with open(path, "r") as f:
             return [[item.strip() for item in line.split(",")] for line in f]
     
-    def to_json(self, path: str) -> None:
+    def _to_json(self, path: str) -> None:
         """
         Save the triples to a JSON file.
 
@@ -97,7 +97,7 @@ class Triples:
             for triple in self.triples:
                 f.write(json.dumps(list(triple)) + "\n")
 
-    def to_csv(self, path: str) -> None:
+    def _to_csv(self, path: str) -> None:
         """
         Save the triples to a CSV file.
 

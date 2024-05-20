@@ -45,9 +45,9 @@ class BaseData(ABC):
         ext = path.split(".")[-1]
 
         if ext == "json" or ext == "jsonl":
-            self.to_json(path)
+            self._to_json(path)
         elif ext == "csv":
-            self.to_csv(path)
+            self._to_csv(path)
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
 
@@ -65,22 +65,22 @@ class BaseData(ABC):
             ext = data.split(".")[-1]
 
             if ext == "json" or ext == "jsonl":
-                self.data = self.from_json(data)
+                self.data = self._from_json(data)
             elif ext == "csv":
-                self.data = self.from_csv(data)
+                self.data = self._from_csv(data)
             else:
                 raise NotImplementedError(f"Extension {ext} not supported")
         
         elif isinstance(data, list):
-            self.data = self.from_list(data)
+            self.data = self._from_list(data)
         
         elif isinstance(data, dict):
-            self.data = self.from_dict(data)
+            self.data = self._from_dict(data)
 
         else:
             raise NotImplementedError(f"Type {type(data)} not supported")
 
-    def to_json(self, path: str):
+    def _to_json(self, path: str):
         """
         Save the data to a JSON file.
 
@@ -91,7 +91,7 @@ class BaseData(ABC):
             for k, v in self.data.items():
                 f.write(json.dumps({self.id_key: k, self.content_key: v}) + "\n")
 
-    def to_csv(self, path: str):
+    def _to_csv(self, path: str):
         """
         Save the data to a CSV file.
 
@@ -102,7 +102,7 @@ class BaseData(ABC):
             for k, v in self.data.items():
                 f.write(f"{k},{v}\n")
 
-    def from_dict(self, data: Mapping) -> Mapping:
+    def _from_dict(self, data: Mapping) -> Mapping:
         """
         Load data from a dictionary.
 
@@ -111,7 +111,7 @@ class BaseData(ABC):
         """
         return data
 
-    def from_list(self, data: List) -> Mapping:
+    def _from_list(self, data: List) -> Mapping:
         """
         Load data from a list.
 
@@ -128,7 +128,7 @@ class BaseData(ABC):
         
         return mapped_data
 
-    def from_json(self, data: str):
+    def _from_json(self, data: str):
         """
         Load data from a JSON file.
 
@@ -145,7 +145,7 @@ class BaseData(ABC):
 
         return mapped_data
 
-    def from_csv(self, data: str):
+    def _from_csv(self, data: str):
         """
         Load data from a CSV file.
 
