@@ -17,7 +17,6 @@ pydantic = "^2.7.1"
 loguru = "^0.7.2"
 ruff = "^0.4.4"
 pyright = "^1.1.362"
-dspy-ai = "^2.4.9"
 
 [build-system]
 requires = ["poetry-core"]
