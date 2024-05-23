@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pirate"
-version = "0.1.1a0"
+version = "0.1.1a1"
 description = "Pirate is a Python package that aims to be a unified framework for all things information retrieval. Currently, it serves as a go-to library for negative mining."
 authors = ["Herumb Shandilya <herumbshandilya123@gmail.com>"]
 readme = "README.md"

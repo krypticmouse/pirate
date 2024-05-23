@@ -4,14 +4,28 @@ repo_url: https://github.com/krypticmouse/pirate
 repo_name: krypticmouse/pirate
 nav:
   - Home: index.md
-  - API Reference: 
-    - Getting Started: API References/index.md
+  - Documentation:
     - Data:
-      - BaseData: API References/Data/base.md
-      - Queries: API References/Data/queries.md
-      - Passages: API References/Data/passages.md
-    - Miners: API References/miners.md
+      - Passages: docs/data/passages.md
+      - Queries: docs/data/queries.md
+      - Triples: docs/data/triples.md
+      - Ranking: docs/data/ranking.md
+    - Miners:
+      - Hard Batch Negative Miner: docs/miners/hard_negative_miner.md
+      - In-Batch Negative Miner: docs/miners/in_batch_negative_miner.md
+    - Chains:
+      - Mine Chain: docs/chains/mine_chain.md
+  - API Reference: 
+    - Getting Started: api/index.md
+    - Data:
+      - BaseData: api/data/base.md
+      - Queries: api/data/queries.md
+      - Passages: api/data/passages.md
+    - Miners: api/miners.md
+  - Blog:
+    - "blog/index.md"
   - Creator Portfolio: https://www.herumbshandilya.com/
+
 docs_dir: 'docs/'
 
 theme:
@@ -42,11 +56,14 @@ theme:
       accent: lime
   icon:
     repo: fontawesome/brands/git-alt
+  logo: img/favicon.png
+  favicon: img/favicon.png
 
 plugins:
   - social
   - search
   - mkdocstrings
+  - blog
 
 extra:
   social:

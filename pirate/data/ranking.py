@@ -30,9 +30,9 @@ class Ranking:
 			ext = ranking.split(".")[-1]
 
 			if ext == "json" or ext == "jsonl":
-				self.ranking = self._from_json(ranking)
+				self._from_json(ranking)
 			elif ext == "csv":
-				self.ranking = self._from_csv(ranking)
+				self._from_csv(ranking)
 			else:
 				raise NotImplementedError(f"Extension {ext} not supported")
 
