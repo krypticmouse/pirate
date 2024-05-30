@@ -1,5 +1,5 @@
-from pirate.models.chains import MineChainConfig
+from pirate.chains.base import Chain
 
-class MineChain:
-    def __init__(self, config: MineChainConfig):
+class MineChain(Chain):
+    def __init__(self, ):
         pass

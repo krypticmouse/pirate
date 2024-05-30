@@ -16,6 +16,7 @@ class Ranking:
 		"""
 		self.load(ranking)
 
+
 	def load(self, ranking: Union[str, List]):
 		"""
 		Load ranking from a file or a list.
@@ -41,6 +42,7 @@ class Ranking:
 		else:
 			raise NotImplementedError(f"Type {type(ranking)} not supported")
 
+
 	def save(self, path: str):
 		"""
 		Save the ranking to a file.
@@ -60,6 +62,7 @@ class Ranking:
 		else:
 			raise NotImplementedError(f"Extension {ext} not supported")
 		
+
 	def get_passage_groups(self, qid: str) -> pl.DataFrame:
 		"""
 		Get the passage groups for a given query ID.
@@ -71,6 +74,22 @@ class Ranking:
 			A DataFrame with the passage groups for the given query ID.
 		"""
 		return self.data.filter(pl.col("qid") == qid).sort("rank")
+	
+	
+	def filter_by_score(self, threshold: float) -> "Ranking":
+		"""
+		Filter the ranking by score.
+
+		Args:
+			threshold: The threshold score.
+
+		Returns:
+			A Ranking with the rows that have a score greater than the threshold.
+		"""
+		df = self.data.filter(pl.col("score") > threshold)
+
+		return Ranking(df.rows())
+
 
 	def _from_json(self, path: str):
 		"""
@@ -81,6 +100,7 @@ class Ranking:
 		"""
 		self.data = pl.read_ndjson(path, schema={"qid": pl.String, "pid": pl.String, "rank": pl.Int32, "score": pl.Float64})
 
+
 	def _from_csv(self, path: str):
 		"""
 		Load ranking from a CSV file.
@@ -89,6 +109,7 @@ class Ranking:
 			path: The path to the CSV file from which the ranking will be loaded.
 		"""
 		self.data = pl.read_csv(path, columns=["qid", "pid", "rank", "score"])
+
 
 	def _from_list(self, ranking: List):
 		"""
@@ -99,6 +120,7 @@ class Ranking:
 		"""
 		self.data = pl.DataFrame(ranking, schema=["qid", "pid", "rank", "score"])
 
+
 	def _to_json(self, path: str):
 		"""
 		Save the ranking to a JSON file.
@@ -107,6 +129,7 @@ class Ranking:
 			path: The path to the file where the ranking will be saved.
 		"""
 		self.data.write_ndjson(path)
+
 
 	def _to_csv(self, path: str):
 		"""
@@ -117,9 +140,11 @@ class Ranking:
 		"""
 		self.data.write_csv(path)
 
+
 	def __getitem__(self, key):
 		""" Return the value of the key. """
 		return self.data[key]
+
 
 	def __repr__(self):
 		""" Return the string representation of the Ranking object. """
@@ -135,10 +160,12 @@ class Ranking:
 		
 		return string
 	
+
 	def __len__(self):
 		""" Return the number of rows in the ranking. """
 		return len(self.data)
 	
+
 	def __iter__(self):
 		""" Return an iterator over the ranking. """
 		return iter(self.data)

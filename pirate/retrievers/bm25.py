@@ -17,6 +17,7 @@ from pirate.data import (
     Queries,
 )
 
+
 class BM25Retriever(BaseRetriever):
     def __init__(self, model: Encoder, tokenizer: Optional[Callable] = None):
         self.model_name = model
@@ -25,6 +26,7 @@ class BM25Retriever(BaseRetriever):
 
         self.indexed_corpus = None
         self.corpus = None
+
 
     def _get_model(self, model: Encoder) -> Any:
         match model:
@@ -36,6 +38,7 @@ class BM25Retriever(BaseRetriever):
                 return BM25Plus
             case _:
                 raise ValueError("Invalid BM25 model. Must be BM25, BM25L, or BM25PLUS.")
+
 
     def index(self, corpus: Passages):
         if not isinstance(corpus, Passages):
@@ -50,7 +53,8 @@ class BM25Retriever(BaseRetriever):
 
         logger.info("Finished indexing corpus.")
 
-    def rank(self, queries: Queries, top_k: Optional[int] = None) -> Ranking:
+
+    def rank_passages(self, queries: Queries, top_k: Optional[int] = None) -> Ranking:
         if self.indexed_corpus is None or self.corpus is None:
             raise ValueError("Index not built. Please call the index method first.")
 

@@ -1,2 +1,2 @@
-class BaseChain:
+class Chain:
     pass

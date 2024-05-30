@@ -36,10 +36,10 @@ def test_bm25_rank(sample_passages, sample_queries):
     retriever = BM25Retriever(Encoder.BM25)
     retriever.index(sample_passages)
     
-    ranking = retriever.rank(sample_queries)
+    ranking = retriever.rank_passages(sample_queries)
     assert len(ranking) == len(sample_queries) * len(sample_passages)
 
-    top_2_ranking = retriever.rank(sample_queries, top_k=2)
+    top_2_ranking = retriever.rank_passages(sample_queries, top_k=2)
     assert len(top_2_ranking) == len(sample_queries) * 2
 
 def test_invalid_index_corpus():
@@ -50,4 +50,4 @@ def test_invalid_index_corpus():
 def test_rank_before_index():
     retriever = BM25Retriever(Encoder.BM25)
     with pytest.raises(ValueError):
-        retriever.rank(Queries(["test"]))
+        retriever.rank_passages(Queries(["test"]))
