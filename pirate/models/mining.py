@@ -1,9 +1,11 @@
+import dspy
+
 from typing import Optional, Union
 from pydantic import BaseModel, ConfigDict
 
 from pirate.models import Encoder
-from pirate.models.types import Sampling
 from pirate.retrievers import BaseRetriever
+from pirate.models.types import Sampling, SyntheticPipelineType
 from pirate.data import (
     Passages,
     Queries,
@@ -34,3 +36,10 @@ class HardMinerParams(MiningParams):
 
 class InBatchMinerParams(MiningParams):
     seed: Optional[int] = None
+
+class SyntheticMinerParams(MiningParams):
+    lm: dspy.LM
+    pipeline: Union[dspy.Module, SyntheticPipelineType]
+
+    queries: Queries
+    passages: Passages

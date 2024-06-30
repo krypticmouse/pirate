@@ -7,6 +7,7 @@ from pirate.data import (
     Ranking,
 )
 
+
 class CrossEncoder(CrossEncoderModel):
     def __init__(
         self,
@@ -20,6 +21,7 @@ class CrossEncoder(CrossEncoderModel):
         self.indexed_corpus = None
         self.corpus = None
         self.list_of_passages = None
+
 
     def rank_passages(self, queries: Queries, corpus: Passages, top_k: Optional[int] = None, *args, **kwargs) -> Ranking:
         self.list_of_passages = [corpus[doc_id] for doc_id in corpus]

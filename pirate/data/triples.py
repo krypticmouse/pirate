@@ -16,6 +16,7 @@ class Triples:
         """
         self.triples = self.load(triples)
 
+
     def load(self, triples: Union[str, List[List[str]]]) -> List[List[str]]:
         """
         Load triples from a file or a list.
@@ -41,6 +42,7 @@ class Triples:
         else:
             raise NotImplementedError(f"Type {type(triples)} not supported")
     
+
     def save(self, path: str):
         """
         Save the triples to a file.
@@ -60,6 +62,7 @@ class Triples:
         else:
             raise NotImplementedError(f"Extension {ext} not supported")
         
+
     def _from_json(self, path: str) -> List[List[str]]:
         """
         Load triples from a JSON file.
@@ -73,6 +76,7 @@ class Triples:
         with open(path, "r") as f:
             return [json.loads(line) for line in f]
     
+
     def _from_csv(self, path: str) -> List[List[str]]:
         """
         Load triples from a CSV file.
@@ -86,6 +90,7 @@ class Triples:
         with open(path, "r") as f:
             return [[item.strip() for item in line.split(",")] for line in f]
     
+
     def _to_json(self, path: str) -> None:
         """
         Save the triples to a JSON file.
@@ -96,6 +101,7 @@ class Triples:
         with open(path, "w") as f:
             for triple in self.triples:
                 f.write(json.dumps(list(triple)) + "\n")
+
 
     def _to_csv(self, path: str) -> None:
         """
@@ -108,17 +114,21 @@ class Triples:
             for triple in self.triples:
                 f.write(f"{','.join(triple)}\n")
 
+
     def __getitem__(self, index: int) -> List[str]:
         """ Return the triple at the given index. """
         return self.triples[index]
     
+
     def __repr__(self):
         """ Return the string representation of the Triples object. """
         return f"Triples({len(self.triples)} triples)"
     
+
     def __len__(self):
         """ Return the number of triples. """
         return len(self.triples)
+    
     
     def __iter__(self):
         """ Return an iterator over the triples. """
