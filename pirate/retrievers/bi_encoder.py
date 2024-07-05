@@ -1,5 +1,6 @@
 import torch
 
+from tqdm import tqdm
 from loguru import logger
 from typing import Optional
 from sentence_transformers import SentenceTransformer
