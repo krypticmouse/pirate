@@ -2,7 +2,7 @@
 
 ![Pirate Logo](./imgs/logo.png)
 
-Pirate is a Python package that aims to be a unified framework for all things information retrieval. Currently, it serves as a go-to library for negative mining. The package provides a set of classes and methods to handle and manipulate data in various formats, making the process of information retrieval and negative mining easy and efficient.
+Pirate is a Python package that aims to be a unified framework for information retrieval. Currently, it serves as a go-to library for negative mining. The package provides a set of classes and methods to handle and manipulate data in various formats, making the process of information retrieval and negative mining easy and efficient.
 
 ## Installation
 
